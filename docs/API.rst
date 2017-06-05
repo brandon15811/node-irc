@@ -31,6 +31,8 @@ Client
             floodProtection: false,
             floodProtectionDelay: 1000,
             sasl: false,
+            retryCount: 0,
+            retryDelay: 2000,
             stripColors: false,
             channelPrefixes: "&#",
             messageSplit: 512,
@@ -77,6 +79,9 @@ Client
         var client = new irc.Client({ autoConnect: false, ... });
         client.connect();
 
+    `retryCount` is the number of times the client will try to automatically reconnect when disconnected. It defaults to 0.
+
+    `retryDelay` is the number of milliseconds to wait before retying to automatically reconnect when disconnected. It defaults to 2000.
 
 .. js:function:: Client.send(command, arg1, arg2, ...)
 
@@ -159,7 +164,7 @@ Client
 
 .. js:function:: Client.disconnect([message [, callback]])
 
-    Disconnects from the IRC server. If `message` if a function it will be
+    Disconnects from the IRC server. If `message` is a function it will be
     treated as the `callback` (i.e. both arguments to this function are
     optional).
 
